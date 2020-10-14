@@ -24,6 +24,9 @@ import { Test_CPK_INFO } from "./utils/constants";
 import { base64encode } from "../src/utils/utils.common";
 dotenv.config();
 
+import { setLogLevel } from "@azure/logger";
+setLogLevel("info");
+
 describe("BlobClient", () => {
   let blobServiceClient: BlobServiceClient;
   let containerName: string;
@@ -805,11 +808,11 @@ describe("BlobClient", () => {
     await checkRehydratePriority("Standard");
   });
 
-  it("lastAccessed returned", async function() {
-    if (isLiveMode()) {
-      // Skipped for now as it's not working in live tests pipeline.
-      this.skip();
-    }
+  it.only("lastAccessed returned", async function() {
+    // if (isLiveMode()) {
+    //   // Skipped for now as it's not working in live tests pipeline.
+    //   this.skip();
+    // }
     const downloadRes = await blockBlobClient.download();
     assert.ok(downloadRes.lastAccessed);
 
