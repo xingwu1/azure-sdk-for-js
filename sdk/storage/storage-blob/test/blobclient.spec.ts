@@ -808,11 +808,7 @@ describe("BlobClient", () => {
     await checkRehydratePriority("Standard");
   });
 
-  it.only("lastAccessed returned", async function() {
-    // if (isLiveMode()) {
-    //   // Skipped for now as it's not working in live tests pipeline.
-    //   this.skip();
-    // }
+  it("lastAccessed returned", async function() {
     const downloadRes = await blockBlobClient.download();
     assert.ok(downloadRes.lastAccessed);
 
